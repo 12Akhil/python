@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <link rel="stylesheet" href="static/chatbot.css">
+</head>
+<body>
+    <div class="chatbot-container">
+        <div id="header">
+            <h1>Ai ChatPro</h1>
+        </div>
+        <div id="chatbot">
+            <div id="conversation"></div>
+            <form id="input-form">
+                <input id="input-field" type="text" placeholder="Type your message here">
+                <button id="submit-button" type="submit">
+                  <img class="send-icon" src="send-message.png" alt="">
+                </button>
+            </form>
+        </div>  
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const form = document.getElementById("input-form");
+            const inputField = document.getElementById("input-field");
+            const conversation = document.getElementById("conversation");
+
+            form.addEventListener("submit", function(event) {
+                event.preventDefault();
+                const query = inputField.value.trim();
+                if (query !== "") {
+                    performSearch(query);
+                }
+            });
+
+            function performSearch(query) {
+                // Perform AJAX request to get search results
+                const xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                        if (xhr.status === 200) {
+                            const results = JSON.parse(xhr.responseText);
+                            displayResults(query, results);
+                        } else {
+                            console.error("Error:", xhr.statusText);
+                        }
+                    }
+                };
+
+                xhr.open("POST", "/search", true);
+                xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+                xhr.send(JSON.stringify({ query: query }));
+            }
+
+            function displayResults(query, results) {
+                conversation.innerHTML = `<p>You searched for: <strong>${query}</strong></p>`;
+                if (results.length === 0) {
+                    conversation.innerHTML += "<p>No results found.</p>";
+                } else {
+                    conversation.innerHTML += "<ul>";
+                    results.forEach(function(result) {
+                        conversation.innerHTML += `<li><a href="${result.url}" target="_blank">${result.product}</a> - ${result.price}</li>`;
+                    });
+                    conversation.innerHTML += "</ul>";
+                }
+            }
+        });
+    </script>
+</body>
+</html>

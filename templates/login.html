@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+  <title>Login</title>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="title-text">
+      <div class="title login">Login / Signup Form</div>
+    </div>
+    <div class="form-container">
+      <div class="slide-controls">
+        <input type="radio" name="slide" id="login" checked>
+        <input type="radio" name="slide" id="signup">
+        <label for="login" class="slide login">Login</label>
+        <label for="signup" class="slide signup">Signup</label>
+        <div class="slider-tab"></div>
+      </div>
+      <div class="form-inner">
+        <form>
+          <div class="field">
+            <input type="email" id="email" placeholder="Email">
+          </div>
+          <div class="field">
+            <input type="password" id="password" placeholder="Password">
+          </div>
+          <div class="button-container">
+            <button type="button" onclick="loginUser()">Login</button>
+            <button type="button" onclick="registerUser()">Register</button>
+        
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+  <script>
+    // Your Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyDEGRaRGDUPF4cPbbLlrIvcxdr4K2nIqkc",
+      authDomain: "mini-project-e2eee.firebaseapp.com",
+      databaseURL: "https://mini-project-e2eee-default-rtdb.firebaseio.com",
+      projectId: "mini-project-e2eee",
+      storageBucket: "mini-project-e2eee.appspot.com",
+      messagingSenderId: "329414619760",
+      appId: "1:329414619760:web:c70fab7ddb908b2b9bbab5",
+      measurementId: "G-V3EVV052EQ"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    
+    // Initialize variables
+    const auth = firebase.auth();
+    const database = firebase.database();
+
+    // Register user
+    function registerUser() {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      auth.createUserWithEmailAndPassword(email, password)
+        .then(function () {
+          window.location.href = "/chatbot";
+        })
+        .catch(function (error) {
+          alert(error.message);
+        });
+    }
+
+    // Login user
+    function loginUser() {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      auth.signInWithEmailAndPassword(email, password)
+        .then(function () {
+          window.location.href = "/chatbot";
+        })
+        .catch(function (error) {
+          alert(error.message);
+        });
+    }
+  </script>
+</body>
+</html>

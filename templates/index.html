@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>AI Chatpro</title>
+    <link rel="stylesheet" href="static/style.css">
+    <script src="https://kit.fontawesome.com/10778c44c3.js" crossorigin="anonymous"></script>
+    
+</head>
+
+<body>
+    <div id="header">
+        <div class="container">
+            <nav>
+               
+                <img src="{{ url_for('static', filename='logo1.png') }}"  class="logo">
+                
+                <ul id="sidemenu">
+                    <li><a href="#header">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Contact</a></li> 
+                    <li><a href="/login" class="btn"target="_blank">Login</a></li>
+                    <li><a href="/login" class="btn" target="_blank">Register</a></li>
+
+
+                </ul>
+                
+            </nav>
+            <div class="header-text">
+                <p>AI ChatPro<p>
+                <h1>Hello!! AIChatpro is here <span> to provide you personalized Recommendations.</span></h1>
+            </div>
+        </div>
+    </div>
+    <!-------------------------About Us---------------------------->
+    <div id="about">
+        <div class="container">
+            <h1 class="sub-title">About Us</h1>
+            <div class="work-list">
+              <div class="work">
+                <img src="{{ url_for('static', filename='vin.jpg') }}"  class="logo">
+                <div class="layer">
+                    <h3>Vinita Bhoi</h3>
+                    <p>CS Engineering</p>
+                    <a href="#"><i class="fa-solid fa-square-arrow-up-right"></i></a>
+                </div>
+              </div> 
+              <div class="work">
+                <img src="{{ url_for('static', filename='akhil.jpg') }}"  class="logo">
+                <div class="layer">
+                    <h3>Akhil Singh</h3>
+                    <p>CS Engineering</p>
+                    <a href="#"><i class="fa-solid fa-square-arrow-up-right"></i></a>
+                </div>
+            </div> 
+            <div class="work">
+                <img src="{{ url_for('static', filename='sidd.jpg') }}"  class="logo">
+                <div class="layer">
+                    <h3>Siddharth Mishra</h3>
+                    <p>CS Engineering</p>
+                    <a href="#"><i class="fa-solid fa-square-arrow-up-right"></i></a>
+                </div>
+            </div> 
+        </div>
+        <a href="index2.html" class="btn" target="_blank">Try AIChatpro Now!!</a>
+    </div>
+</div>
+<!-------services---------------------------------->
+<div id="services">
+    <div class="container">
+        <h1 class="sub-title">Our Services</h1>
+        <div class="services-list">
+            <div>
+                <i class="fa-solid fa-code"></i>
+                <h2>Front End Designing</h2>
+                <p>Designing of website interfaces.</p>
+                <a href="a">Learn more</a>
+            </div>
+            <div>
+                <i class="fa-brands fa-adn"></i>
+                <h2>Backend Designing</h2>
+                <p>Implementation of Algorithms to generate responses.</p>
+                <a href="a">Learn more</a>
+            </div>
+            <div>
+                <i class="fa-solid fa-crop-simple"></i>
+                <h2>Documentation and Backend Designing.</h2>
+                <p>Efficient Design Management</p>
+                <a href="a">Learn more</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-------------------contact---------------------------->
+      <div class="container">
+            <div class="row">
+             <div id="contact">
+         <div class="contact-left">
+                    <h1 class="sub-title">Contact Details</h1>
+                    <p><i class="fa-solid fa-paper-plane"></i>contactme@gmail.com</p>
+                    <p><i class="fa-sharp fa-solid fa-square-phone"></i>0123456789</p>
+                    <div class="social-icons">
+                        <a href="https://facebook.com"><i class="fa-brands fa-facebook"></i></a>
+                        <a href=""><i class="fa-brands fa-square-twitter"></i></a>
+                        <a href=""><i class="fa-brands fa-square-instagram"></i></a>
+                        <a href=""><i class="fa-brands fa-linkedin"></i></a>
+                    </div>
+                </div>
+                    
+                <div class="contact-right">
+                    <form name="submit-to-google-sheet">
+                        <input type="text" name="Name" placeholder="Your Name" required>
+                        <input type="email" name="Email" placeholder="Your Email" required>
+                        <textarea name="Message" rows="4" placeholder="Your Message"></textarea>
+                        <button type="submit" class="btn btn2">Submit</button>
+                    </form>
+                    <span id="msg"></span>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="copyright">
+            <p><i class="fa-solid fa-copyright"></i>Copyright</p>
+        </div>
+    </div>
+
+
+<script>
+    var tablinks=document.getElementsByClassName("tab-links");
+    var tabcontents=document.getElementsByClassName("tab-contents");
+    function opentab(tabname){
+        for(tablink of tablinks){
+            tablink.classList.remove("active-link");
+        }
+        for(tabcontent of tabcontents){
+            tabcontent.classList.remove("active-tab");
+        }
+        event.currentTarget.classList.add("active-link");
+        document.getElementById(tabname).classList.add("active-tab");
+    }
+</script>
+<script>
+    var sidemenu=document.getElementById("sidemenu");
+    function openmenu(){
+        sidemenu.style.right="0";
+    }
+        function closemenu(){
+        sidemenu.style.right="-200px";
+    }
+    
+</script>
+
+<script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxnrl3UbYNpjwXYEybioOP0a5aqsBsd4BKXUNoIvJflH8pmn0KOW05QkPH2dJpAnZpsyg/exec';
+    const form = document.forms['submit-to-google-sheet'];
+    const msg = document.getElementById("msg");
+  
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => {
+            msg.innerHTML = "Message sent Successfully";
+            setTimeout(function() {
+                msg.innerHTML = "";
+            }, 5000);
+            form.reset();
+        })
+        .catch(error => console.error('Error!', error.message));
+    });
+</script>
+
+</body>
+</html>
+
